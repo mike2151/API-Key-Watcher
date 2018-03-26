@@ -18,12 +18,16 @@ import com.intellij.usageView.UsageInfo;
 import com.intellij.usages.*;
 import com.intellij.util.Processor;
 
+import java.util.ArrayList;
+
 public class checkCode extends AnAction {
 
-    public static final NotificationGroup NOTIFICATION_GROUP = NotificationGroup.toolWindowGroup("Find in Path",
-            ToolWindowId.FIND, false);
 
     Project project;
+
+    //list of likely phrases that involve API keys
+    ArrayList<String> apiKeyPhrases = new ArrayList<String>();
+
 
     public checkCode() {
         // Set the menu item name.
@@ -31,19 +35,7 @@ public class checkCode extends AnAction {
     }
 
     public void actionPerformed(AnActionEvent event) {
-        /*
-        DataContext dataContext = event.getDataContext();
-        Project project = event.getData(PlatformDataKeys.PROJECT);
 
-        FindInProjectManager fpm = FindInProjectManager.getInstance(project);
-
-        if (!fpm.isEnabled()) {
-            showNotAvailableMessage(event, project);
-            return;
-        }
-
-        fpm.findInProject(dataContext);
-        */
         project = event.getData(PlatformDataKeys.PROJECT);
         DataContext dataContext = event.getDataContext();
         final FindManager findManager = FindManager.getInstance(project);
@@ -55,6 +47,12 @@ public class checkCode extends AnAction {
         findModel.setOpenInNewTabVisible(true);
         findModel.setOpenInNewTabEnabled(false);
         findModel.setOpenInNewTab(false);
+
+        //set up strings to find that will likely be API Keys.
+        //TODO figure out how to search multiple phrases
+        findModel.setStringToFind("yo");
+
+
         initModel(findModel, dataContext);
 
         findManager.showFindDialog(findModel, () -> {
