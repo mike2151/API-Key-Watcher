@@ -2,7 +2,7 @@
   <id>com.redefiningproductions.com.api-key-watcher</id>
   <name>API Key Watcher</name>
   <version>1.0</version>
-  <vendor email="redefiningproductions@gmail.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="redefiningproductions@gmail.com" url="http://www.redefiningproductions.herokuapp.com">Redefining Productions</vendor>
 
   <description><![CDATA[
       Ensure that you do not leave your API keys in the code.
@@ -27,9 +27,10 @@
   </extensions>
 
   <actions>
-    <group id="apikey.check" text="API Key Checker" description="Sample menu">
+    <group id="apikey.check" text="API Key Watcher" description="Menu for API Key Watcher">
       <add-to-group group-id="MainMenu" anchor="last"  />
-      <action id="apikey.check_code" class="checkCode" text="Check Code" description="menuitem" />
+      <action id="apikey.check_code" class="checkCode" text="Check Code" description="This tool looks in the project for all usages of API keys.
+Once identified, the user can ensure no keys remain in the code when getting pushed to online repositories like GitHub." />
     </group>
   </actions>
 
